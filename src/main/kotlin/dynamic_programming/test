@@ -1,0 +1,15 @@
+class Solution {
+  fun nthUglyNumber(n: Int): Int {
+    val lst = ArrayList<Int>()
+    var n1 = 1
+    while(true) {
+      if (lst.size == n) return lst[n-1]
+      while (n1 % 2 == 0) n1 /= 2
+      while (n1 % 3 == 0) n1 /= 3
+      while (n1 % 5 == 0) n1 /= 5
+      if (n1 == 1) lst.add(n1)
+      n1++
+    }
+    return -1
+  }
+}
