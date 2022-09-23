@@ -1,0 +1,30 @@
+class Solution {
+  fun addOneRow(root: TreeNode?, `val`: Int, depth: Int): TreeNode? {
+    if (depth == 1) {
+      var newRoot = TreeNode(`val`)
+      newRoot.left = root
+      return newRoot
+    }
+    val q = LinkedList<TreeNode?>()
+    q.add(root)
+    var d = 1
+    while (!q.isEmpty()) {
+      val sz = q.size
+      for (i in 0 until sz) {
+        var tmp = q.poll()
+        if (d == depth - 1) {
+          val lft = tmp?.left
+          val rght = tmp?.right
+          tmp?.left = TreeNode(`val`)
+          tmp?.right = TreeNode(`val`)
+          lft?.let{ tmp?.left?.left = it }
+          rght?.let{ tmp?.right?.right = it }
+        }
+        tmp?.left?.let{ q.add(it) }
+        tmp?.right?.let{ q.add(it) }
+      }
+      d++
+    }
+    return root
+  }
+}

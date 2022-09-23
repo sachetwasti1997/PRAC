@@ -1,0 +1,28 @@
+class Solution {
+  fun updateMatrix(mat: Array<IntArray>): Array<IntArray> {
+    val dir = arrayOf(1 to 0, 0 to 1, -1 to 0, 0 to -1)
+    val q = LinkedList<Pair<Int, Int>>()
+    val res = Array(mat.size){ IntArray(mat[0].size){Int.MAX_VALUE} }
+    for (i in mat.indices) {
+      for (j in mat[0].indices) {
+        if (mat[i][j] == 0) {
+          q.add(Pair(i, j))
+          res[i][j] = 0
+        }
+      }
+    }
+    while (!q.isEmpty()) {
+      val tmp = q.poll()
+      for (d in dir) {
+        val x = d.first + tmp.first
+        val y = d.second + tmp.second
+        if ((x in 0 .. mat.size - 1) && (y in 0 .. mat[0].size - 1)
+        && res[d.first][d.second] + 1 < mat[x][y]) {
+          q.add(Pair(x, y))
+          res[x][y] = res[d.first][d.second] + 1
+        }
+      }
+    }
+    return res
+  }
+}
