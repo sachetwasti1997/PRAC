@@ -1,18 +1,16 @@
 class Solution {
-  fun widthOfBinaryTree(root: TreeNode?): Int {
-    val lst = LinkedList<Pair<TreeNode?, Int>>()
-    lst.add(Pair(root, 0))
-    var res = 0
-    while (!lst.isEmpty()) {
-      val hd = lst.peek()
-      val sz = lst.size
-      for (i in 0 until sz) {
-        val tmp = lst.poll()
-        tmp?.left?.let{ lst.add(Pair(it, 2*tmp.second)) }
-        tmp?.right?.let{ lst.add(Pair(it, 2*tmp.second+1)) }
-      }
-      res = res.coerceAtLeast(tmp.second - hd.second + 1)
+  fun copyRandomBinaryTree(root: Node?): NodeCopy? {
+    val mp = HashMap<Node, NodeCopy>()
+    fun create(root: Node?): NodeCopy? {
+      if (root == null) return null
+      mp[root]?.let{ return it }
+      val nn = NodeCopy(root.`val`)
+      mp[root] = nn
+      nn.left = create(root.left)
+      nn.right = create(root.right)
+      nn.left = create(root.random)
+      return nn
     }
-    return res
+    return create(root)
   }
 }

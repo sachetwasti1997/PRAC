@@ -1,39 +1,22 @@
 class Solution {
-  fun palindromePairs(words: Array<String>): List<List<Int>> {
-    fun isPalindrome(s: String): Boolean {
-      if (s == "" || s.length == 1) return true
-      var i = 0
-      var j = s.length
-      while (i >= j) {
-        if (s[i] != s[j]) return false
-      }
-      return true
+  Input: s = "4193 with words"
+  Output: 4193
+  fun largestPalindromic(num: String): String {
+    val mp = HashMap<Int, Int>()
+    var stt = StringBuilder()
+    for (i in num) {
+      if (i != 0) stt.add(i)
     }
-    val mp = HashMap<String, Int>()
-    var i = 0
-    for (i in words) mp[i.reversed()] = i++
-    val res = ArrayList<ArrayList<Int>>()
-    for (i in words.indices) {
-      mp[words[i]].?let{ res.add(arrayListOf(i, it)) }
-      var j = i.length - 1
-      while (j > 0) {
-        val str = i.slice(j until i.length)
-        if (isPalindrome(str)) {
-          val str1 = i.slice(0 .. j)
-          mp[words[str1]].?let{ res.add(arrayListOf(i, it)) }
-        }
-        j--
-      }
-      j = 0
-      while (j < i.length) {
-        val str = i.slice(0 .. j)
-        if (isPalindrome(str)) {
-          val str1 =  i.slice(j+1 .. i.length)
-          mp[words[str1]].?let{ res.add(arrayListOf(i, it)) }
-        }
-        j++
-      }
+    var num1 = stt.toString()
+    for (i in num1) {
+      mp[i] = mp.getOrPut(i){0}+1
     }
-    return res
+    var ev = 0
+    var od = 0
+    for ((k,v) in mp) {
+      if (v%2 == 0) ev += v
+      else od = max(od, v)
+    }
+    return ev+od
   }
 }

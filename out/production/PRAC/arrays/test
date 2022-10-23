@@ -1,21 +1,27 @@
 class Solution {
-  fun trap(height: IntArray): Int {
-    var left = 0
-    val arr_left = IntArray(height.size)
-    val arr_right = IntArray(height.size)
-    for (i in height.indices) {
-      left = left.coerceAtLeast(height[i])
-      arr_left[i] = left
+Input: nums = [1,2,0]
+Output: 3
+  fun setZeroes(m: Array<IntArray>): Unit {
+    var arr = ArrayList<Pair<Int, Int>>()
+    for (i in m.indices) {
+      for (j in m[0].indices) {
+        if (m[i][j] == 0) arr.add(i to j)
+      }
     }
-    left = arr_right[height.size-1]
-    for (i in height.length - 1 downTo 0) {
-      left = left.coerceAtLeast(height[i])
-      arr_right[i] = left
+    val cpy = m.clone()
+    for (i in arr) {
+      var k = i.first
+      var l = i.second
+      var i1 = 0
+      while (i1 < m.size) cpy[i1++][l] = 0
+      var j1 = 0
+      while (j1 < m[0].size) cpy[k][j1++] = 0
     }
-    int res = 0
-    for (i in height.indices) {
-      res += arr_left[i].coerceAtMost(arr_right[i]) - height[i]
+    println(cpy)
+    for (i in m.indices) {
+      for (j in m[0].indices) {
+        m[i][j] = cpy[i][j]
+      }
     }
-    return res
   }
 }

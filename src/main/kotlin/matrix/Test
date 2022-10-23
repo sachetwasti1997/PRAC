@@ -1,0 +1,11 @@
+class Solution {
+  fun transpose(m: Array<IntArray>): Array<IntArray> {
+    val n = Array(m.size) {IntArray(m[0].size)}
+    for (i in m.indices) {
+      for (j in m[0].indices) {
+        n[j][i] = m[i][j]
+      }
+    }
+    return n
+  }
+}

@@ -1,33 +1,5 @@
 class Solution {
-  fun nthUglyNumber(n: Int): Int {
-    val map = HashMap<Int, ArrayList<Int>>()
-    map[2] = arrayListOf(2)
-    map[3] = arrayListOf(3)
-    map[5] = arrayListOf(5)
-    var p1 = 1
-    var p2 = 0
-    var p3 = 0
-    var val2 = 2
-    var val3 = 3
-    var val5 = 5
-    var mini = 2
-    val res = arrayListOf(-1)
-    while (res.size <= n) {
-      val2 = mini * val2
-      val3 = mini * val3
-      val4 = mini * val5
-      map[2]?.add(val2)
-      map[3]?.add(val3)
-      map[5]?.add(val5)
-      val m1 = map[2]?.get(p1) ?: Int.MAX_VALUE
-      val m2 = map[3]?.get(p2) ?: Int.MAX_VALUE
-      val m3 = map[5]?.get(p5) ?: Int.MAX_VALUE
-      mini = minOf(m1, m2, m3)
-      if (mini == map?.get(p1)) p1++
-      else if (mini == map?.get(p2)) p2++
-      else p3++
-      res.add(mini)
-    }
-    return res[res.size-1]
+  fun numWays(n: Int, k: Int): Int {
+
   }
 }

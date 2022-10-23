@@ -1,23 +1,26 @@
 class Solution{
-  fun findSubsequences(nums: IntArray): List<List<Int>> {
-    val tmp = ArrayList<Int>()
-    val res = ArrayList<ArrayList<Int>>()
-    fun create(i: Int) {
-      if (i >= nums.size) return
-      if (tmp.size >= 2) {
-        res.add(ArrayList(tmp))
+  Input: n = 4
+    Output: "1211"
+    Explanation:
+    countAndSay(1) = "1"
+    countAndSay(2) = say "1" = one 1 = "11"
+    countAndSay(3) = say "11" = two 1's = "21"
+    countAndSay(4) = say "21" = one 2 + one 1 = "12" + "11" = "1211"
+  fun countAndSay(n: Int): String {
+    var res = StringBuilder()
+    fun cs(n: Int) {
+      if (n == 1) {
         return
       }
-      for (j in i+1 until nums.size) {
-        if (nums[j] >= nums[i]) {
-          if(tmp.isEmpty()) {
-            tmp.add(nums[i])
-          }
-          tmp.add(nums[j])
-          create(i+1)
-          tmp.remove(tmp.size-1)
-        }
+      val mp = LinkedHashMap<Char, Int>()
+      for (i in res) mp[i] = mp.getOrPut(i){0}+1
+      res.clear()
+      for ((k,v) in mp){
+        res.append(v)
+        res.append(k)
       }
     }
+    cs(n)
+    return res
   }
 }
