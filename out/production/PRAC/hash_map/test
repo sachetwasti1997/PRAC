@@ -1,34 +1,27 @@
+typealias ls = List<String>
+
 class Solution {
-  fun sumEvenAfterQueries(nums: IntArray, queries: Array<IntArray>): IntArray {
-    val even = HashMap<Int, Int>(nums.size)
-    var evn_sm = 0
-    for (i in nums.indices) {
-      if (nums[i] % 2 == 0) {
-        even[i] = nums[i]
-        evn_sm += nums[i]
-      }
-    }
-    val res = IntArray(nums.size)
-    var k = 0
-    for (i in queries) {
-      if ((nums[i[1]] + i[0]) % 2 == 0) {
-        if (i[1] !in even) {
-          nums[i[1]] += i[0]
-          evn_sm += nums[i[1]]
-        }else {
-          evn_sm += i[0]
-          nums[i[1]] += i[0]
+
+  fun choose(str: String, arr: ls, inx: Int): Int {
+    if (inx < arr.size) {
+      var lngth = 0
+      val s = StringBuilder(str)
+      val mp = HashSet<Char>()
+      for (i in str) {
+        if (i !in mp) {
+          mp.add(i)
+          s.append(i)
         }
-        even[i[1]] = nums[i[1]]
-      }else if ((nums[i[1]] + i[0]) % 2 != 0) {
-        if (i[1] in even) {
-          even.remove(i[1])
-          evn_sm -= nums[i[1]]
-        }
-        nums[i[1]] += i[0]
+        else return 0
       }
-      res[k++] = evn_sm
+      var ln = choose(s.toString(), arr, inx+1)
+      ln = ln.coerceAtLeast(choose(str, arr, inx+1))
+      return s.length + ln
     }
-    return res
+    return 0
+  }
+
+  fun maxLength(arr: ls): Int {
+    return choose("", arr, 0)
   }
 }

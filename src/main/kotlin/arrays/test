@@ -1,16 +1,15 @@
 class Solution {
 Input: nums = [1,2,2,4]
 Output: [2,3]
-  fun findErrorNums(nums: IntArray): IntArray {
-    val mp = HashMap<Int, Int>()
-    for (i in nums) mp[i] = mp.getOrPut(i){0}+1
-    val res = IntArray(2)
-    var i = 0
-    for ((k, v) in mp)
-      if (v == 2)
-        res[i++] = k
-    for (i1 in 1 .. nums.size)
-      if (i1 !in mp) res[i++] = i1
-    return res
+  fun arrayStringsAreEqual(w1: Array<String>, w2: Array<String>): Boolean {
+    val st = StringBuilder()
+    for (i in w1) st.append(i)
+    val str = st.toString()
+    var k = 0
+    for (i in w2) {
+      for (j in i)
+        if (j != str[k++]) return false
+    }
+    return true
   }
 }

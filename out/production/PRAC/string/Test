@@ -1,27 +1,22 @@
 class Solution {
   Input: s = "4193 with words"
   Output: 4193
-  fun myAtoi(s: String): Int {
-    if (s.length == 0) return 0
-    var i = 0
-    var flag = 1
-    val nm = StringBuilder()
-    var s1 = s.filter { !it.isWhitespace() }
-    if (s[0] == '-') {
-      flag = -1
-      i++
+  fun largestPalindromic(num: String): String {
+    val mp = HashMap<Int, Int>()
+    var stt = StringBuilder()
+    for (i in num) {
+      if (i != 0) stt.add(i)
     }
-    while (i < s.length && s[i] == '0') i++
-    while (i < s1.length && s[i] >= '0' && s[i] <= 9) {
-      nm.append(s[i])
-      i++
+    var num1 = stt.toString()
+    for (i in num1) {
+      mp[i] = mp.getOrPut(i){0}+1
     }
-    var b1 = BigInteger(nm)
-    var cmp = b1.compareTo(BigInteger.valueOf(Int.MAX_VALUE.toLong()))
-    if (cmp > 0) {
-      if (flag == -1) return Int.MIN_VALUE
-      else return Int.MAX_VALUE
+    var ev = 0
+    var od = 0
+    for ((k,v) in mp) {
+      if (v%2 == 0) ev += v
+      else od = max(od, v)
     }
-    return flag * b1.toInt()
+    return ev+od
   }
 }
