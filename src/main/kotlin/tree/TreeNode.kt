@@ -7,3 +7,7 @@ class NodeR(var `val`: Int, var left: NodeR?, var right: NodeR?, var parent: Nod
 class Node(var `val`: Int, var left: Node? = null, var right: Node? = null, var random: Node? = null)
 
 class NodeCopy(var `val`: Int, var left: Node? = null, var right: Node? = null, var random: Node? = null)
+
+class NodeN(var `val`: Int) {
+  var children: List<NodeN?> = listOf()
+}
