@@ -1,7 +1,7 @@
 package arrays
 
 import java.util.*
-
+/**/
 class find_orig_from_doubled {
   fun findOriginalArray(changed: IntArray): IntArray {
     if (changed.size % 2 != 0) return intArrayOf()
